@@ -1,0 +1,29 @@
+﻿@page "/"
+@using ScrumRetroApp.Shared.DTOs
+@inherits DashboardBase
+
+@namespace ScrumRetroApp.Blazor.Pages
+
+<h2>@Title</h2>
+<br />
+
+<h5>Active retrospectives:</h5>
+
+@if(DtosActiveRetro.Count > 0)
+{
+    @foreach(RetroDTO dtoActiveRetro in DtosActiveRetro)
+    {
+        <div class="row align-middle border-0">
+            <div class="col-sm-2">
+                <p>@dtoActiveRetro.Name</p>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-secondary" style="width: 100%" @onclick="@(e => Join(@dtoActiveRetro.Id))">Join</button>
+                        </div>
+                        </div>
+    }
+
+    <div hidden="hidden">
+        <CurrentParticipantsComponent OnUserJoined="@(OnUserJoined)" @ref="CurrentParticipant"></CurrentParticipantsComponent>
+    </div>
+}

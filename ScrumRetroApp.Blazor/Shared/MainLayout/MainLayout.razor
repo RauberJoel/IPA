@@ -1,0 +1,19 @@
+﻿@inherits MainLayoutBase
+
+@namespace ScrumRetroApp.Blazor.Shared
+
+<header>
+    <div class="container-fluid">
+        <HeaderComponent @ref="Header"></HeaderComponent>
+    </div>
+</header>
+<main class="mt-px-10">
+    <div class="container-fluid">
+            @Body
+    </div>
+</main>
+<footer>
+    <div class="container-fluid">
+        <RetroFooterComponent @ref="RetroFooter"></RetroFooterComponent>
+    </div>
+</footer>

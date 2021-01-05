@@ -1,0 +1,42 @@
+﻿@inherits RetroFooterComponentBase
+
+@namespace ScrumRetroApp.Blazor.Components
+
+@if(ShowStartButton)
+{
+    <button type="button" class="btn btn-secondary btn-retro" @onclick="@OnStartClicked">
+        Start
+    </button>
+}
+@if(ShowGoButton)
+{
+    <button type="button" class="btn btn-secondary btn-retro" @onclick="@OnGoClicked">
+        Go
+    </button>
+}
+@if(ShowReadyButton)
+{
+    <button type="button" class="btn btn-secondary btn-retro" @onclick="@OnReadyClicked">
+        Ready
+    </button>
+    @foreach(string image in Session.UserURLImagesRetroFooter.Take(10))
+    {
+        <style>
+            #profileImage
+            {
+                border-radius: 50%;
+                width: 24px;
+                height: 24px;
+            }
+        </style>
+        <div class="d-inline">
+            <img src="@image" alt="@Session.UserName" id="profileImage"/>
+        </div>
+    }
+}
+@if(ShowEndButton)
+{
+    <button type="button" class="btn btn-secondary btn-retro" @onclick="@OnEndClicked">
+        End
+    </button>
+}
