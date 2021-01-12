@@ -204,6 +204,7 @@ namespace ScrumRetroApp.Test.API.Controllers
 			OkObjectResult okObjectResult = actionResult as OkObjectResult;
 			Assert.IsNotNull(okObjectResult);
 
+
 			List<BenutzerDTO> lstResult = (List<BenutzerDTO>) okObjectResult.Value;
 			Assert.IsNotNull(lstResult);
 			Assert.AreEqual(dtos, lstResult);
