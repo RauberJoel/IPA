@@ -9,5 +9,6 @@ namespace ScrumRetroApp.API.Controllers
 		IActionResult EditBenutzer([FromBody] BenutzerDTO dtoBenutzer);
 		IActionResult RemoveBenutzer(int nBenutzerId);
 		IActionResult Login(string strMail, string strPasswort);
+		IActionResult GetAllBenutzer();
 	}
 }

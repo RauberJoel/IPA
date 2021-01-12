@@ -8,6 +8,9 @@ namespace ScrumRetroApp.Blazor.Services
 	{
 		#region Properties
 		public int BenutzerId { get; set; }
+		public string Email { get; set; }
+		public bool? Admin { get; set; }
+		public bool LoggedIn { get; set; }
 		#endregion
 	}
 }

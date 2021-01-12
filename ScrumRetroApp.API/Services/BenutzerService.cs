@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 using ScrumRetroApp.Shared.DTOs;
 
 namespace ScrumRetroApp.API.Services
@@ -41,6 +43,11 @@ namespace ScrumRetroApp.API.Services
 		public bool Login(string strMail, string strPasswort)
 		{
 			return _databaseSerivce.RepoBenutzer.Login(strMail, strPasswort);
+		}
+
+		public List<BenutzerDTO> GetAllBenutzer()
+		{
+			return _databaseSerivce.RepoBenutzer.GetAllBenutzer();
 		}
 		#endregion
 	}

@@ -14,8 +14,15 @@ namespace ScrumRetroApp.Blazor.Shared
 
 		protected HeaderComponent Header { get; set; }
 
+		public EventCallback OnLoggedInEvent => EventCallback.Factory.Create(this, LoggedInEvent);
+
 		[Inject]
 		private NavigationManager Manager { get; set; }
+
+		public void LoggedInEvent()
+		{
+			this.Header.Refresh();
+		}
 		#endregion
 	}
 }

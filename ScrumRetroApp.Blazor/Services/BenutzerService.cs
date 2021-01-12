@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
 using ScrumRetroApp.Shared.DTOs;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ScrumRetroApp.Blazor.Services
 {
@@ -25,28 +29,43 @@ namespace ScrumRetroApp.Blazor.Services
 			this._session = session;
 		}
 		#endregion
+
+		#region Publics
 		public async Task<int> CreateBenutzer(BenutzerDTO dto)
 		{
-			return await JsonSerializer.DeserializeAsync<int>
-				(await _httpClient.GetStreamAsync("api/benutzer/create/" + dto),
-				 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+			string json = JsonConvert.SerializeObject(dto);
+			StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+			HttpResponseMessage response = await _httpClient.PostAsync("api/benutzer/create/", data);
+			int nResult = response.Content.ReadAsAsync<int>().Result;
+
+			return nResult;
 		}
 
 		public async Task EditBenutzer(BenutzerDTO dto)
 		{
-			await _httpClient.GetStreamAsync("api / benutzer / create / " + dto);
+			string json = JsonConvert.SerializeObject(dto);
+			StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+			HttpResponseMessage response = await _httpClient.PostAsync("api/benutzer/edit/", data);
 		}
 
 		public async Task RemoveBenutzer(int nBenutzerId)
 		{
-			await _httpClient.GetStreamAsync("api / benutzer / create / " + nBenutzerId);
+			await _httpClient.GetStreamAsync("api/benutzer/remove/" + nBenutzerId);
 		}
 
 		public async Task<bool> Login(string strMail, string strPasswort)
 		{
 			return await JsonSerializer.DeserializeAsync<bool>
-				(await _httpClient.GetStreamAsync("api/benutzer/create/" + strMail + "/" + strPasswort),
+				(await _httpClient.GetStreamAsync("api/benutzer/login/" + strMail + "/" + strPasswort),
 				 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 		}
+
+		public async Task<List<BenutzerDTO>> GetAllBenutzer()
+		{
+			return await JsonSerializer.DeserializeAsync<List<BenutzerDTO>>
+				(await _httpClient.GetStreamAsync("api/benutzer/getall"),
+				 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+		}
+		#endregion
 	}
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿/*using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using ScrumRetroApp.API.Services;
@@ -69,4 +69,4 @@ namespace ScrumRetroApp.Test.API.Controllers
 		}
 		#endregion
 	}
-}
+}*/

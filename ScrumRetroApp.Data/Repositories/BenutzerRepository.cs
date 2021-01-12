@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.CompilerServices;
 using ScrumRetroApp.Data.Models;
@@ -51,7 +53,18 @@ namespace ScrumRetroApp.Data.Repositories
 		{
 			Benutzer benutzer = FirstOrDefault(u => u.Mail == strMail);
 
+			if(benutzer == null) return false;
+
 			return benutzer.Passwort == strPasswort;
+		}
+
+		public List<BenutzerDTO> GetAllBenutzer()
+		{
+			IEnumerable<Benutzer> listBenutzer = GetAll();
+
+			List<BenutzerDTO> dtos = listBenutzer?.Select(MapEntityToDTO).ToList();
+
+			return dtos;
 		}
 
 		public void Dispose()

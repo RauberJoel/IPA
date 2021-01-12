@@ -1,0 +1,59 @@
+﻿@page "/"
+@inherits LoginBase
+
+@namespace ScrumRetroApp.Blazor.Pages
+<style>
+    .label {
+        padding-top: 1.5%;
+    }
+
+    .buttons
+    {
+        text-align: center;
+    }
+
+    button
+    {
+        width: 20%;
+    }
+
+    .btn-link
+    {
+        color: black;
+        text-decoration: underline
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-1 label">
+            Email
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control" @bind="strEmail">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-1 label">
+            Password
+        </div>
+        <div class="col-5">
+            <input type="password" class="form-control" @bind="strPassword">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="button" class="btn btn-secondary" @onclick="@Login">Login</button>
+    </div>
+
+    <div class="buttons">
+        <button type="button" class="btn btn-link" @onclick="@Register">Register</button>
+    </div>
+</div>

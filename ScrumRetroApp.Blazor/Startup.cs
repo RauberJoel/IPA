@@ -56,6 +56,7 @@ namespace ScrumRetroApp.Blazor
 			                                });
 			services.AddScoped<ISession, Session>();
 			services.AddHttpClient<IBenutzerService, BenutzerService>(client => client.BaseAddress = new Uri("https://localhost:5001/"));
+			services.AddHttpClient<ITFSService, TFSService>(client => client.BaseAddress = new Uri("https://localhost:5001/"));
 
 			//Wird zu einem späteren Zeitpunkt umgesetzt, nur übergangsmässig drin
 			//services.AddSingleton<CircuitHandler, TrackingCircuitHandler>();

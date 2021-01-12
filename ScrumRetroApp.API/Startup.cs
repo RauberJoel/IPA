@@ -32,6 +32,7 @@ namespace ScrumRetroApp.API
 
 			services.AddSingleton<IDatabaseService>(x => new DatabaseService(Settings.DbConnection));
 			services.AddScoped<IBenutzerService, BenutzerService>();
+			services.AddScoped<ITFSService, TFSService>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 		}
 

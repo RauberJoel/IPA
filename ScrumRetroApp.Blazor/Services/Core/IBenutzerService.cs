@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ScrumRetroApp.Shared.DTOs;
 
@@ -10,5 +11,6 @@ namespace ScrumRetroApp.Blazor.Services
 		Task EditBenutzer(BenutzerDTO dtoBenutzer);
 		Task RemoveBenutzer(int nBenutzerId);
 		Task<bool> Login(string strMail, string strPasswort);
+		Task<List<BenutzerDTO>> GetAllBenutzer();
 	}
 }

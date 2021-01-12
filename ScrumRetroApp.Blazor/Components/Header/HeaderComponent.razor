@@ -2,69 +2,26 @@
 
 @namespace ScrumRetroApp.Blazor.Components
 
-@if (IsRetroHeader)
-{
-    <div class="row align-items-center">
-        <div class="col-5">
-            <div class="row h-100 align-items-center">
-                <div class="col-3 pl-px-30">
-                    <img src="images/M&amp;S-Logo-klein.png" alt="M&amp;S Logo" width="120" height="40">
-                </div>
-                <div class="col-5 pt-px-10">
-                    <h1>Retrospectives</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-7">
-            <div class="row h-100 align-items-center">
-                <div class="offset-3 col-2 text-right">Team: @this._session.DisplayTeamName</div>
-                <div class="col-1 text-center">
-                    <img src="images/Wrench.svg" alt="Team-Configuration" width="30" height="45" />
-                </div>
-                <CurrentParticipantsComponent @ref="CurrentParticipant"></CurrentParticipantsComponent>
-            </div>
-        </div>
-    </div>
-}
-else
-{
-    <div class="row align-items-center">
-        <div class="col-5">
-            <div class="row h-100 align-items-center">
-                <div class="col-1">
-                    <div class="dropdown">
-                        <button class="btn pl-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="images/HamburgerIcon.svg">
-                        </button>
-                        <HamburgerMenuComponent></HamburgerMenuComponent>
-                    </div>
-                </div>
-                <div class="col-3 pl-px-30">
-                    <img src="images/M&amp;S-Logo-klein.png" alt="M&amp;S Logo" width="120" height="40">
-                </div>
-                <div class="col-5 pt-px-10">
-                    <h1 class="">Retrospectives</h1>
-                </div>
-            </div>
-        </div>
-        <div class="col-7">
-            <div class="row h-100 align-items-center">
-                <div class="offset-5 col-4 text-right">
-                    <button type="button" class="btn btn-secondary btn-retro" @onclick="@ShowNewRetroPopUp">Create Retrospectives</button>
-                    @if (IsModalOpen)
-                    {
-                        <NewRetroComponent OnCancel="@(CancelCreate)" OnRetroCreatedCallback="@(OnCreatedRetro)"></NewRetroComponent>
-                    }
-                </div>
-                <div class="col-2">Team: @this._session.DisplayTeamName</div>
-                <div class="col-1">
-                    <img src="images/Wrench.svg" alt="Team-Configuration" width="30" height="45" />
-                </div>
-            </div>
-        </div>
-    </div>
-}
+<style>
+    div
+    {
+        text-align: center;
+        width: 100%;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
 
-<div hidden="hidden">
-    <CurrentParticipantsComponent @ref="CurrentParticipant"></CurrentParticipantsComponent>
+    .profileImage
+    {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+    }
+</style>
+<div>
+    <img src="images/M&S.png" width="20%" />
+    @if(_session.LoggedIn)
+    {
+        <img class="profileImage" src="@imagesrc" alt="@_session.Email" />
+    }
 </div>

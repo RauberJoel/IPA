@@ -7,5 +7,11 @@ namespace ScrumRetroApp.Blazor.Services
 	public interface ISession
 	{
 		int BenutzerId { get; set; }
+
+		string Email { get; set; }
+
+		bool? Admin { get; set; }
+
+		bool LoggedIn { get; set; }
 	}
 }

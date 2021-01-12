@@ -1,29 +1,89 @@
-﻿@page "/"
+﻿@page "/dashboard"
+@using Microsoft.Data.SqlClient
 @using ScrumRetroApp.Shared.DTOs
 @inherits DashboardBase
+@inject ISession _session
 
 @namespace ScrumRetroApp.Blazor.Pages
 
-<h2>@Title</h2>
-<br />
+<style>
+    td {
+        text-align: center !important;
+        vertical-align: middle !important;
+       }
 
-<h5>Active retrospectives:</h5>
-
-@if(DtosActiveRetro.Count > 0)
-{
-    @foreach(RetroDTO dtoActiveRetro in DtosActiveRetro)
+    .buttons
     {
-        <div class="row align-middle border-0">
-            <div class="col-sm-2">
-                <p>@dtoActiveRetro.Name</p>
-            </div>
-            <div class="col-sm-1">
-                <button class="btn btn-secondary" style="width: 100%" @onclick="@(e => Join(@dtoActiveRetro.Id))">Join</button>
-                        </div>
-                        </div>
+        text-align: center;
     }
 
-    <div hidden="hidden">
-        <CurrentParticipantsComponent OnUserJoined="@(OnUserJoined)" @ref="CurrentParticipant"></CurrentParticipantsComponent>
-    </div>
+    button
+    {
+        width: 20%;
+    }
+
+    .profileImage {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+    }
+
+    input {
+        background-color: transparent;
+        border: none;
+        text-align: center;
+    }
+</style>
+
+<img class="profileImage" src="@imagesrc" alt="@_session.Email" />
+
+<br/>
+<br />
+
+@if(_session.Admin != null && _session.Admin == true)
+{
+    <p>All Users</p>
+    <table class="table table-striped custom" id="tableColumns">
+        <tbody>
+        <tr>
+            <th>Prename</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Blockiert</th>
+            <th></th>
+        </tr>
+        @foreach(BenutzerDTO dto in dtosBenutzer)
+        {
+            <tr>
+                <td contenteditable><input type="text" @bind="@dto.Vorname" @oninput="@(e => OnChanged(dto, "Vorname", e.Value.ToString()))"/></td>
+                                           <td contenteditable><input type="text" @bind="@dto.Name" @oninput="@(e => OnChanged(dto, "Name", e.Value.ToString()))"/></td>
+                                                                      <td contenteditable><input type="text" @bind="@dto.Mail" @oninput="@(e => OnChanged(dto, "Mail", e.Value.ToString()))"/></td>
+                                                                                                 <td contenteditable style="text-align: center">
+                                                                                                     <div class="form-check">
+                                                                                                         <input class="form-check-input position-static" type="checkbox" id="checkboxBlockiert" @bind="@dto.Blockiert" aria-label="..." @oninput="@(e => OnChanged(dto, "Blockiert", e.Value.ToString()))"/>
+                                                                                                                </div>
+                                                                                                                </td>
+                                                                                                                <td class="p-0" style="width: 10%">
+                                                                                                                    <!--- prevenDefault eingebaut, weil sonst Seite neu geladen wird.-->
+                                                                                                                    <button style="background: none; border: none;" @onclick:preventDefault="true" @onclick="@(e => RemoveColumn(dto))">
+                                                                                                                                <img src="images/cross.svg" width="20" height="20" alt="cross"/>
+                                                                                                                            </button>
+                                                                                                                            </td>
+                                                                                                                            </tr>
+        }
+                                                                                                                            </tbody>
+                                                                                                                            </table>
+    <div style="float: left; margin-left: 1%; width: 100%">
+        <button style="background: none; border: none; text-align: left; width: 100%" @onclick:preventDefault="true" @onclick="@AddColumn">
+                    <img src="images/plus.svg" width="20" height="20" alt="plus"/>
+                    <span style="vertical-align: middle; width: auto; margin-left: 2%">New User</span>
+                </button>
+                </div>
+    <br/>
+    <br/>
 }
+<div class="buttons">
+    <button type="button" class="btn btn-secondary" @onclick="@Logout">Logout</button>
+</div>
+
+

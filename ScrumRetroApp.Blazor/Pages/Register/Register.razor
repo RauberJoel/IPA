@@ -1,0 +1,85 @@
+﻿@page "/register"
+@inherits RegisterBase
+
+@namespace ScrumRetroApp.Blazor.Pages
+<style>
+    .label {
+        padding-top: 1.5%;
+    }
+
+    .buttons
+    {
+        text-align: center;
+    }
+
+    button
+    {
+        width: 20%;
+    }
+
+    .btn-link
+    {
+        color: black;
+        text-decoration: underline;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-1 label">
+            Prename
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control" @bind="strPrename">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-1 label">
+            Name
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control" @bind="strName">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-1 label">
+            Email
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control" @bind="strEmail">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-1 label">
+            Password
+        </div>
+        <div class="col-5">
+            <input type="password" class="form-control" @bind="strPassword">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <div class="buttons">
+        <button type="button" @onclick="@Register" class="btn btn-secondary">Register</button>
+    </div>
+
+    <div class="buttons">
+        <button type="button" @onclick="@Login" class="btn btn-link">Login</button>
+    </div>
+</div>
